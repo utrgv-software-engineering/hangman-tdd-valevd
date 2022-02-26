@@ -40,26 +40,27 @@ void main() {
   );
 
   test(
-      'Once we are at our game screen, we should be able to guess the letter b and the game should register it as one correct letter',
-      () async {
-    //Here we assign variables using the keys we have placed on our widgets in our screens folder so we can use them in this test
-    final findGuessingTextField = find.byValueKey('guess-textfield');
-    final guessLetterBtnFinder = find.byValueKey('guess-letter-btn');
-    final findLettersLeftProgressField = find.byValueKey('word-progress');
+    'Once we are at our game screen, we should be able to guess the letter b and the game should register it as one correct letter',
+    () async {
+      //Here we assign variables using the keys we have placed on our widgets in our screens folder so we can use them in this test
+      final findGuessingTextField = find.byValueKey('guess-textfield');
+      final guessLetterBtnFinder = find.byValueKey('guess-letter-btn');
+      final findLettersLeftProgressField = find.byValueKey('word-progress');
 
-    //Since we just started a new game, we expect to have no progress toward the completion of the game
-    expect(await driver.getText(findLettersLeftProgressField), '------');
+      //Since we just started a new game, we expect to have no progress toward the completion of the game
+      expect(await driver.getText(findLettersLeftProgressField), '------');
 
-    //Here we are going to guess our first letter b
-    await driver.tap(findGuessingTextField);
-    await driver.enterText('b');
-    await driver.waitFor(find.text('b'));
+      //Here we are going to guess our first letter b
+      await driver.tap(findGuessingTextField);
+      await driver.enterText('b');
+      await driver.waitFor(find.text('b'));
 
-    await driver.tap(guessLetterBtnFinder);
+      await driver.tap(guessLetterBtnFinder);
 
-    //We expect for the game to now have registered that we have correctly guessed the first letter of the word banana that we instantiated it with
-    expect(await driver.getText(findLettersLeftProgressField), 'b-----');
-  }, skip: true);
+      //We expect for the game to now have registered that we have correctly guessed the first letter of the word banana that we instantiated it with
+      expect(await driver.getText(findLettersLeftProgressField), 'b-----');
+    },
+  );
 
   test(
     'After guessing the letter n, we are expecting the game to continue registering it as a correct guess and updating our progress',
