@@ -26,14 +26,51 @@ class HangmanGame {
 
   bool guess(String letter) {
     // TODO: Fill this in
+
+    RegExp validChar = new RegExp(r'[a-zA-Z]');
+    // aA-zZ char || not null || not empty string
+    if (!validChar.hasMatch(letter) ||
+        letter == null ||
+        letter == "" ||
+        letter.length > 1) {
+      throw ArgumentError();
+    }
+    letter = letter.toLowerCase();
+    if (_correctGuesses.contains(letter)) {
+      return false;
+    } else if (_wrongGuesses.contains(letter)) {
+      return false;
+    } else if (_word.contains(letter)) {
+      _correctGuesses += letter;
+      return true;
+    } else {
+      _wrongGuesses += letter;
+      return true;
+    }
   }
 
   String blanksWithCorrectGuesses() {
     // TODO: Fill this in
+    String hold = "";
+    for (int i = 0; i < _word.length; i++) {
+      if (_correctGuesses.contains(_word[i])) {
+        hold += _word[i];
+      } else {
+        hold += "-";
+      }
+    }
+    return hold;
   }
 
   String status() {
     // TODO: Fill this in
+    if (_wrongGuesses.length >= 7) {
+      return "lose";
+    } else if (blanksWithCorrectGuesses() == _word) {
+      return "win";
+    } else {
+      return "play";
+    }
   }
 
   //when running integration tests always return "banana"
