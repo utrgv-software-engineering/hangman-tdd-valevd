@@ -11,6 +11,9 @@ void main() {
       final hangmanGame = HangmanGame(word);
       //expect that the hangmanGame objects word matches the originally passed word
       expect(hangmanGame.word(), word);
+
+      //added for score
+      expect(hangmanGame.score(), 0);
     });
 
     test('Function correctGuesses() should return empty string initially', () {
@@ -219,5 +222,64 @@ void main() {
       String word = await HangmanGame.getStartingWord(areWeInIntegrationTest);
       expect(word, 'banana');
     });
+  });
+
+  //score tests
+  group("Test Scoring Logic", () {
+    test("after a single correct guess", () {
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess one correct letter
+      hangmanGame.guess('b');
+      //We expect the score to be 10
+      expect(hangmanGame.score, 10);
+    }, skip: true);
+    test("after a single incorrect guess", () {
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess one incorrect letter
+      hangmanGame.guess('z');
+      //We expect the score to be -5
+      expect(hangmanGame.score, -5);
+    }, skip: true);
+    test("after multiple correct guesses", () {
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess 2+ correct letters
+      hangmanGame.guess('b');
+      hangmanGame.guess('a');
+      //We expect the score to be 20
+      expect(hangmanGame.score, 20);
+    }, skip: true);
+    test("after multiple incorrect guesses", () {
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess 2 incorrect letters
+      hangmanGame.guess('z');
+      hangmanGame.guess('r');
+      //We expect the score to be -10
+      expect(hangmanGame.score, -10);
+    }, skip: true);
+    test("after some correct and some incorrect guesses", () {
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess 2 correct
+      hangmanGame.guess('b');
+      hangmanGame.guess('a');
+      //Guess 1 incorrect letter
+      hangmanGame.guess('z');
+      //We expect the score to be 15
+      expect(hangmanGame.score, 15);
+    }, skip: true);
+    test("after all letters guessed", () {
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess all
+      hangmanGame.guess('b');
+      hangmanGame.guess('a');
+      hangmanGame.guess('n');
+      //We expect the score to be 60
+      expect(hangmanGame.score, 60);
+    }, skip: true);
   });
 }
