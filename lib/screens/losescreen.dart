@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:hangman_game/config/globals.dart';
 import 'package:hangman_game/models/hangmangame.dart';
@@ -46,8 +48,7 @@ class LoseScreen extends StatelessWidget {
                   //TODO: Push a GameScreen and give it the HangmanGame
                   Navigator.push(
                     context,
-                    MaterialPageRoute<void>(
-                        builder: (context) => GameScreen(game)),
+                    MaterialPageRoute(builder: (context) => GameScreen(game)),
                   );
                 }),
             Padding(

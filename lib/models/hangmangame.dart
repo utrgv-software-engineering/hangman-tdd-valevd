@@ -14,8 +14,7 @@ class HangmanGame {
     if (_word.length < 6) {
       // longer == easier
       _score = 5;
-    }
-    if (_word.length > 5) {
+    } else if (_word.length > 5) {
       // longer == easier
       _score = 0;
     }

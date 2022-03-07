@@ -264,7 +264,7 @@ void main() {
   });
 
   //score tests
-  group("Test Scoring Logic!<6", () {
+  group("Test Scoring Logic not <6", () {
     test(
       "starts on 0",
       () {
