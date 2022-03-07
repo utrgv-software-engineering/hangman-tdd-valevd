@@ -5,6 +5,9 @@ import 'package:hangman_game/config/globals.dart';
 import 'gamescreen.dart';
 
 class WinScreen extends StatelessWidget {
+  HangmanGame gamec;
+  //This should be modified to take in a HangmanGame
+  WinScreen(this.gamec);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +37,17 @@ class WinScreen extends StatelessWidget {
                   String word =
                       await HangmanGame.getStartingWord(areWeInIntegrationTest);
                   HangmanGame game = HangmanGame(word);
+
                   //TODO: Push a GameScreen and give it the HangmanGame
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => GameScreen(game)),
+                  );
                 }),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+              child: Text("Score: ${gamec.score()}", key: Key('score-text')),
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+//gamescreen.dart
 import 'package:flutter/material.dart';
 import 'package:hangman_game/models/hangmangame.dart';
 
@@ -72,6 +73,7 @@ class _GameScreenState extends State<GameScreen> {
 
                             try {
                               // TODO: Calling the guess function on the game and passing it 'userGuess'
+                              widget.game.guess(letter);
 
                               // TODO: Uncomment the following lines and get them to work. Follow the order of the tests, not the order that the TODOs they appear in the code.
                               // if( its a repeat ){
@@ -81,13 +83,35 @@ class _GameScreenState extends State<GameScreen> {
                               // }else{
                               //   showError = false;
                               // }
+                              if (widget.game.guess(letter) == false) {
+                                showError = true;
+                                guessTextFieldErrorMessage =
+                                    'already used that letter';
+                              } else {
+                                showError = false;
+                              }
 
                               // TODO: Reset the text in the textbox after a guess
+                              guessTextController.text = '';
+                              FocusScope.of(context).unfocus();
 
                               // TODO: Check if the user has won the game, if they did navigate them to the win screen
+                              if (widget.game.status() == 'win') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                        builder: (context) =>
+                                            WinScreen(widget.game)));
+                              }
 
                               // TODO: Check if the user has lost the game, if they did navigate them to the lose screen. You will need to pass the game to the LoseScreen.
-
+                              if (widget.game.status() == 'lose') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                        builder: (context) =>
+                                            LoseScreen(widget.game)));
+                              }
                             } catch (e) {
                               //If the user is guessing an invalid character return this message
                               guessTextFieldErrorMessage = 'invalid';
@@ -109,6 +133,11 @@ class _GameScreenState extends State<GameScreen> {
                           ),
                         ),
                       ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+                      child: Text("Score: ${widget.game.score()}",
+                          key: Key('score-text')),
                     ),
                   ],
                 ),

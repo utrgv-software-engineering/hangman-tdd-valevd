@@ -5,9 +5,9 @@ import 'package:hangman_game/models/hangmangame.dart';
 import 'gamescreen.dart';
 
 class LoseScreen extends StatelessWidget {
-  HangmanGame game;
+  HangmanGame gamec;
   //This should be modified to take in a HangmanGame
-  LoseScreen(this.game);
+  LoseScreen(this.gamec);
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class LoseScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             ),
-            Text('Your word was: ${game.word()}',
+            Text('Your word was: ${gamec.word()}',
                 style: TextStyle(fontSize: 25)),
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
@@ -44,7 +44,16 @@ class LoseScreen extends StatelessWidget {
                   HangmanGame game = HangmanGame(word);
 
                   //TODO: Push a GameScreen and give it the HangmanGame
-                })
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                        builder: (context) => GameScreen(game)),
+                  );
+                }),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+              child: Text("Score: ${gamec.score()}", key: Key('score-text')),
+            ),
           ],
         ),
       ),
