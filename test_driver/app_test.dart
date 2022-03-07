@@ -3,7 +3,7 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
-void main() {
+Future<void> main() async {
   FlutterDriver driver;
 
   // Connect to the Flutter driver before running any tests.
@@ -19,23 +19,24 @@ void main() {
   });
 
   test(
-      'We should be at the home screen at launch and have the ability to start a new game',
-      () async {
-    //Here we assign variables using the keys we have placed on our widgets in our screens folder so we can use them in this test
-    final newGameBtnFinder = find.byValueKey('new-game-button');
-    final newGameTextFinder = find.byValueKey('new-game-text');
+    'We should be at the home screen at launch and have the ability to start a new game',
+    () async {
+      //Here we assign variables using the keys we have placed on our widgets in our screens folder so we can use them in this test
+      final newGameBtnFinder = find.byValueKey('new-game-button');
+      final newGameTextFinder = find.byValueKey('new-game-text');
 
-    //We are expecting for the text found in the button on the home screen to say 'New Game'
-    expect(await driver.getText(newGameTextFinder), "New Game");
+      //We are expecting for the text found in the button on the home screen to say 'New Game'
+      expect(await driver.getText(newGameTextFinder), "New Game");
 
-    // Next we tap the button and are expecting to be navigated to a new screen where our guessing text field will be
-    await driver.tap(newGameBtnFinder);
+      // Next we tap the button and are expecting to be navigated to a new screen where our guessing text field will be
+      await driver.tap(newGameBtnFinder);
 
-    //Assignment of variable with the key of our guessing text field
-    final guessLetterTextFinder = find.byValueKey('guess-letter-text');
+      //Assignment of variable with the key of our guessing text field
+      final guessLetterTextFinder = find.byValueKey('guess-letter-text');
 
-    expect(await driver.getText(guessLetterTextFinder), "Guess Letter");
-  }, skip: true);
+      expect(await driver.getText(guessLetterTextFinder), "Guess Letter");
+    },
+  );
 
   test(
       'Once we are at our game screen, we should be able to guess the letter b and the game should register it as one correct letter',
@@ -240,4 +241,15 @@ void main() {
     await driver.tap(guessLetterBtnFinder);
     await driver.waitFor(find.text("invalid"));
   }, skip: true);
+
+  group('Widget Tests', () {
+    test(
+      'Win screen Score',
+      () async {
+        final findScoreTextWidget = find.byValueKey('score-text');
+        expect(await driver.getText(findScoreTextWidget), 'Score: 0');
+      },
+    );
+  });
+  //also missing lose screen score
 }

@@ -48,7 +48,8 @@ class WinScreen extends StatelessWidget {
                 }),
             Padding(
               padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
-              child: Text("Score: ${gamec.score()}", key: Key('score-text')),
+              child:
+                  Text("Score: ${gamec.score()}", key: Key('win-score-text')),
             ),
           ],
         ),

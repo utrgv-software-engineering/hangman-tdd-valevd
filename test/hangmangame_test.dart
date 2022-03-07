@@ -264,7 +264,7 @@ void main() {
   });
 
   //score tests
-  group("Test Scoring Logic not <6", () {
+  group("Test Scoring Logic not <5", () {
     test(
       "starts on 0",
       () {
@@ -275,7 +275,7 @@ void main() {
       },
     );
     test(
-      "after a single correct guess!<6",
+      "after a single correct guess!<5",
       () {
         String word = 'banana';
         final hangmanGame = HangmanGame(word);
@@ -286,7 +286,7 @@ void main() {
       },
     );
     test(
-      "after a single incorrect guess!<6",
+      "after a single incorrect guess!<5",
       () {
         String word = 'banana';
         final hangmanGame = HangmanGame(word);
@@ -297,7 +297,7 @@ void main() {
       },
     );
     test(
-      "after multiple correct guesses!<6",
+      "after multiple correct guesses!<5",
       () {
         String word = 'banana';
         final hangmanGame = HangmanGame(word);
@@ -309,7 +309,7 @@ void main() {
       },
     );
     test(
-      "after multiple incorrect guesses!<6",
+      "after multiple incorrect guesses!<5",
       () {
         String word = 'banana';
         final hangmanGame = HangmanGame(word);
@@ -321,7 +321,7 @@ void main() {
       },
     );
     test(
-      "after some correct and some incorrect guesses!<6",
+      "after some correct and some incorrect guesses!<5",
       () {
         String word = 'banana';
         final hangmanGame = HangmanGame(word);
@@ -335,7 +335,7 @@ void main() {
       },
     );
     test(
-      "after all letters guessed!<6",
+      "after all letters guessed!<5",
       () {
         String word = 'banana';
         final hangmanGame = HangmanGame(word);
@@ -348,20 +348,20 @@ void main() {
       },
     );
   });
-  group("Test Scoring Logic<6", () {
+  group("Test Scoring Logic<5", () {
     test(
       "starts on 5",
       () {
-        String word = 'banan';
+        String word = 'bana';
         final hangmanGame = HangmanGame(word);
         //We expect the score to be 5
         expect(hangmanGame.score(), 5);
       },
     );
     test(
-      "after a single correct guess<6",
+      "after a single correct guess<5",
       () {
-        String word = 'banan';
+        String word = 'bana';
         final hangmanGame = HangmanGame(word);
         //Guess one correct letter
         hangmanGame.guess('b');
@@ -370,9 +370,9 @@ void main() {
       },
     );
     test(
-      "after a single incorrect guess<6",
+      "after a single incorrect guess<5",
       () {
-        String word = 'banan';
+        String word = 'bana';
         final hangmanGame = HangmanGame(word);
         //Guess one incorrect letter
         hangmanGame.guess('z');
@@ -381,9 +381,9 @@ void main() {
       },
     );
     test(
-      "after multiple correct guesses<6",
+      "after multiple correct guesses<5",
       () {
-        String word = 'banan';
+        String word = 'bana';
         final hangmanGame = HangmanGame(word);
         //Guess 2+ correct letters
         hangmanGame.guess('b');
@@ -393,9 +393,9 @@ void main() {
       },
     );
     test(
-      "after multiple incorrect guesses<6",
+      "after multiple incorrect guesses<5",
       () {
-        String word = 'banan';
+        String word = 'bana';
         final hangmanGame = HangmanGame(word);
         //Guess 2 incorrect letters
         hangmanGame.guess('z');
@@ -405,9 +405,9 @@ void main() {
       },
     );
     test(
-      "after some correct and some incorrect guesses<6",
+      "after some correct and some incorrect guesses<5",
       () {
-        String word = 'banan';
+        String word = 'bana';
         final hangmanGame = HangmanGame(word);
         //Guess 2 correct
         hangmanGame.guess('b');
@@ -419,9 +419,9 @@ void main() {
       },
     );
     test(
-      "after all letters guessed<6",
+      "after all letters guessed<5",
       () {
-        String word = 'banan';
+        String word = 'bana';
         final hangmanGame = HangmanGame(word);
         //Guess all
         hangmanGame.guess('b');
@@ -432,13 +432,17 @@ void main() {
       },
     );
   });
-  //group('Widget Tests', () {
-  // test(
-  //    'Win screen Score',
-  //    () {
 
-  //   },
-  //  );
-  // });
-  //also missing lose screen score
+  /* group('Widget Tests', () {
+   test(
+      'Win screen Score',
+      () async {
+    final findScoreTextWidget = find.byValueKey('score-text');
+    expect(await driver.getText(findScoreTextWidget), 'Score: 0');
+
+     },
+    );
+   });
+  //also missing lose screen score 
+  */
 }

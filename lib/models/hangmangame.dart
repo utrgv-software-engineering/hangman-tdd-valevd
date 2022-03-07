@@ -11,10 +11,10 @@ class HangmanGame {
     _word = word;
     _correctGuesses = "";
     _wrongGuesses = "";
-    if (_word.length < 6) {
+    if (_word.length < 5) {
       // longer == easier
       _score = 5;
-    } else if (_word.length > 5) {
+    } else if (_word.length > 4) {
       // longer == easier
       _score = 0;
     }
