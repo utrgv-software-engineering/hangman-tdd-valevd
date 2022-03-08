@@ -73,7 +73,8 @@ class _GameScreenState extends State<GameScreen> {
 
                             try {
                               // TODO: Calling the guess function on the game and passing it 'userGuess'
-                              widget.game.guess(letter);
+                              //widget.game.guess(letter);
+                              var _userGuess = widget.game.guess(letter);
 
                               // TODO: Uncomment the following lines and get them to work. Follow the order of the tests, not the order that the TODOs they appear in the code.
                               // if( its a repeat ){
@@ -83,7 +84,7 @@ class _GameScreenState extends State<GameScreen> {
                               // }else{
                               //   showError = false;
                               // }
-                              if (widget.game.guess(letter) == false) {
+                              if (_userGuess == false) {
                                 showError = true;
                                 guessTextFieldErrorMessage =
                                     'already used that letter';
@@ -92,8 +93,7 @@ class _GameScreenState extends State<GameScreen> {
                               }
 
                               // TODO: Reset the text in the textbox after a guess
-                              guessTextController.text = '';
-                              FocusScope.of(context).unfocus();
+                              guessTextController.clear();
 
                               // TODO: Check if the user has won the game, if they did navigate them to the win screen
                               if (widget.game.status() == 'win') {
